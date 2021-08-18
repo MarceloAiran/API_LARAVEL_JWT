@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 // $this->delete('categories/{id}','Api\CategoryController@destroy');
 
 $this->post('auth', 'Auth\AuthApiController@authenticate');
+$this->post('auth-refresh', 'Auth\AuthApiController@RefreshToken');
 $this->get('me', 'Auth\AuthApiController@getAuthenticatedUser');
  
 $this->group(['prefix' => 'v1', 'namespace' => 'Api\v1'], function (){
