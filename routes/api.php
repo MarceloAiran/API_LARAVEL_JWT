@@ -11,14 +11,18 @@ $this->post('auth', 'Auth\AuthApiController@authenticate');
 $this->post('auth-refresh', 'Auth\AuthApiController@RefreshToken');
 $this->get('me', 'Auth\AuthApiController@getAuthenticatedUser');
  
-$this->group(['prefix' => 'v1', 'namespace' => 'Api\v1'], function (){
-
+$this->group([
     
+    'prefix' => 'v1', 
+    'namespace' => 'Api\v1',
+    'middleware' => 'auth:api'
 
-    $this->apiResource('categories','CategoryController');
+    ], function (){
 
-    $this->apiResource('products', 'ProductController');
+        $this->apiResource('categories','CategoryController');
 
-    $this->get('categories/{id}/products', 'CategoryController@products');
+        $this->apiResource('products', 'ProductController');
+
+        $this->get('categories/{id}/products', 'CategoryController@products');
 
 });
